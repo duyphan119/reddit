@@ -13,6 +13,7 @@ import MongoStore from "connect-mongo";
 import session from "express-session";
 import { COOKIE_NAME, __prod__ } from "./constants";
 import { Context } from "./types/Context";
+import { PostResolver } from "./resolvers/post";
 const port = process.env.PORT || 4000;
 
 const main = async () => {
@@ -43,7 +44,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver, UserResolver],
+      resolvers: [HelloResolver, UserResolver, PostResolver],
       validate: false,
     }),
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
